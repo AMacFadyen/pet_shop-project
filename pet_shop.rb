@@ -50,10 +50,30 @@ def add_pet_to_stock(shop_name, new_pet)
 end
 
 def customer_pet_count(customer)
-    customer[:pets].sum
+    customer[:pets].length()
 end
 
 def add_pet_to_customer(reciever, pet_to_add)
     reciever[:pets] << pet_to_add
-    puts reciever[:pets].length()
+    return reciever[:pets].length()
+end
+
+def customer_can_afford_pet(customer_id, pet_to_buy)
+    if pet_to_buy[:price] > customer_id[:cash]
+        return false
+    else
+        return true
+    end
+end
+
+def sell_pet_to_customer(shop_name, pet_to_add, reciever)
+    for pet in shop_name[:pets]
+        if pet_to_add /= shop_name[:pets][:name]
+            reciever[:pets] << pet_to_add
+            shop_name[:admin][:pets_sold] += 1
+            shop_name[:admin][:total_cash] += pet_to_add[:price]
+        else
+            return nil
+        end
+    end
 end
