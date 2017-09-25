@@ -67,13 +67,9 @@ def customer_can_afford_pet(customer_id, pet_to_buy)
 end
 
 def sell_pet_to_customer(shop_name, pet_to_add, reciever)
-    for pet in shop_name[:pets]
-        if pet_to_add /= shop_name[:pets][:name]
-            reciever[:pets] << pet_to_add
-            shop_name[:admin][:pets_sold] += 1
-            shop_name[:admin][:total_cash] += pet_to_add[:price]
-        else
-            return nil
-        end
+    if pet_to_add != nil && customer_can_afford_pet(reciever, pet_to_add) == true
+            add_pet_to_customer(reciever, pet_to_add)
+            increase_pets_sold(shop_name, 1)
+            add_or_remove_cash(shop_name, pet_to_add[:price])
     end
 end
